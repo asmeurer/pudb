@@ -14,11 +14,11 @@ def get_palette(may_use_fancy_formats):
         ("current breakpoint source", "black", "dark red"),
         ("current breakpoint focused source", "white", "dark red"),
 
-        ("variables", "black", "dark cyan"),
+        ("variables", "white", "default"),
         ("variable separator", "dark cyan", "light gray"),
 
-        ("var label", "dark blue", "dark cyan"),
-        ("var value", "black", "dark cyan"),
+        ("var label", "dark blue", "default"),
+        ("var value", "white", "default"),
         ("focused var label", "dark blue", "dark green"),
         ("focused var value", "black", "dark green"),
 
@@ -37,25 +37,25 @@ def get_palette(may_use_fancy_formats):
         ("focused return label", "light gray", "dark blue"),
         ("focused return value", "black", "dark green"),
 
-        ("stack", "black", "dark cyan"),
+        ("stack", "white", "default"),
 
-        ("frame name", "black", "dark cyan"),
+        ("frame name", "white", "default"),
         ("focused frame name", "black", "dark green"),
-        ("frame class", "dark blue", "dark cyan"),
+        ("frame class", "dark blue", "default"),
         ("focused frame class", "dark blue", "dark green"),
-        ("frame location", "light cyan", "dark cyan"),
+        ("frame location", "light cyan", "default"),
         ("focused frame location", "light cyan", "dark green"),
 
         ("current frame name", add_setting("white", "bold"),
-            "dark cyan"),
+            "default"),
         ("focused current frame name", add_setting("white", "bold"),
             "dark green", "bold"),
-        ("current frame class", "dark blue", "dark cyan"),
+        ("current frame class", "dark blue", "default"),
         ("focused current frame class", "dark blue", "dark green"),
-        ("current frame location", "light cyan", "dark cyan"),
+        ("current frame location", "light cyan", "default"),
         ("focused current frame location", "light cyan", "dark green"),
 
-        ("breakpoint", "black", "dark cyan"),
+        ("breakpoint", "default", "default"),
         ("focused breakpoint", "black", "dark green"),
 
         ("selectable", "black", "dark cyan"),
@@ -74,27 +74,27 @@ def get_palette(may_use_fancy_formats):
         ("value", "yellow", "dark blue"),
         ("fixed value", "light gray", "dark blue"),
 
-        ("search box", "black", "dark cyan"),
+        ("search box", "default", "default"),
         ("search not found", "white", "dark red"),
 
         ("dialog title", add_setting("white", "bold"), "dark cyan"),
 
         # highlighting
-        ("source", "black", "default"),
+        ("source", "white", "default"),
         ("focused source", "black", "dark green"),
-        ("highlighted source", "black", "dark magenta"),
-        ("current source", "black", "dark cyan"),
-        ("current focused source", "white", "dark cyan"),
+        ("highlighted source", "white", "light cyan"),
+        ("current source", "white", "light gray"),
+        ("current focused source", "white", "brown"),
         ("current highlighted source", "white", "dark cyan"),
 
-        ("keyword", "brown", "default"),
+        ("keyword", "dark magenta", "default"),
         ("kw_namespace", "dark magenta", "default"),
-        ("literal", "black", "default"),
-        ("string", "dark red", "default"),
-        ("punctuation", "black", "default"),
-        ("comment", "dark blue", "default"),
+        ("literal", "dark cyan", "default"),
+        ("string", "light red", "default"),
+        ("punctuation", "white", "default"),
+        ("comment", "dark green", "default"),
         ("classname", "dark cyan", "default"),
-        ("funcname", "dark cyan", "default"),
+        ("funcname", "white", "default"),
 
         ]
 
