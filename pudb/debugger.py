@@ -139,12 +139,78 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 """
 
+from collections import MutableMapping, defaultdict, MutableSequence
+
+class mylist(MutableSequence):
+    def __init__(self, i=None):
+        if i is None:
+            self.l = list()
+        else:
+            self.l = list(i)
+
+    def __delitem__(self, item):
+        return self.l.__delitem__(item)
+
+    def __getitem__(self, item):
+        return self.l.__getitem__(item)
+
+    def __setitem__(self, item, val):
+        print("list setitem", file=sys.stderr)
+        print(item, val, file=sys.stderr)
+        print(self.l, file=sys.stderr)
+        import traceback
+        traceback.print_stack(file=sys.stderr)
+        return self.l.__setitem__(item, val)
+
+    def __len__(self):
+        return self.l.__len__()
+
+    def insert(self, index, object):
+        print("list insert", file=sys.stderr)
+        print(index, object, file=sys.stderr)
+        import traceback
+        traceback.print_stack(file=sys.stderr)
+        return self.l.insert(index, object)
+
+class mydict(MutableMapping):
+    def __init__(self, d):
+        self.d = defaultdict(mylist, d)
+
+    def __setitem__(self, item, val):
+        print("dict setitem", file=sys.stderr)
+        print(item, val, file=sys.stderr)
+        print(self.d, file=sys.stderr)
+        import traceback
+        traceback.print_stack(file=sys.stderr)
+        val = mylist(val)
+        return self.d.__setitem__(item, val)
+
+    def __getitem__(self, item):
+        print("dict getitem", file=sys.stderr)
+        print(item, file=sys.stderr)
+        print(self.d, file=sys.stderr)
+        import traceback
+        traceback.print_stack(file=sys.stderr)
+        ret = self.d.__getitem__(item)
+        print(self.d, file=sys.stderr)
+        return ret
+
+    def __delitem__(self, item):
+        return self.d.__delitem__(item)
+
+    def __iter__(self):
+        return self.d.__iter__()
+
+    def __len__(self):
+        return self.d.__len__()
 
 # {{{ debugger interface
 
 class Debugger(bdb.Bdb):
     def __init__(self, steal_output=False):
         bdb.Bdb.__init__(self)
+        print("initial breaks", self.breaks, file=sys.stderr)
+        # self.breaks = mydict(self.breaks)
         self.ui = DebuggerUI(self)
         self.steal_output = steal_output
 
@@ -205,6 +271,14 @@ class Debugger(bdb.Bdb):
             for lineno in bp_lst
             for bp in self.get_breaks(fn, lineno)
             if not bp.temporary])
+
+    # def get_breaks(self, filename, lineno):
+    #     if (filename, lineno) in self.set_traces:
+    #         return []
+    #     filename = self.canonic(filename)
+    #     return filename in self.breaks and \
+    #         lineno in self.breaks[filename] and \
+    #         bdb.Breakpoint.bplist[filename, lineno] or []
 
     def enter_post_mortem(self, exc_tuple):
         self.post_mortem = True
